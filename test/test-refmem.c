@@ -38,9 +38,9 @@ int main(int argc, char **argv)
     assert(p->f == NULL);
     assert(sizeof(p->buf) == 32);
 
-    REFMEM(p)->retain(p);
-    REFMEM(p)->release(p);
-    REFMEM(p)->release(p);
+    assert(REFMEM(p)->retain(p) == p);
+    assert(REFMEM(p)->release(p) == p);
+    assert(REFMEM(p)->release(p) == NULL);
 
     return 0;
 }

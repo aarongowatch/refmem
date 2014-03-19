@@ -38,8 +38,10 @@ static void *__refmem_release(void *p)
 
     free(self);
 
-EXIT:
     return NULL;
+
+EXIT:
+    return self->data; 
 }
 
 static void *__refmem_data(void *p)
