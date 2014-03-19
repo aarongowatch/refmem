@@ -16,7 +16,7 @@ typedef struct {
 
 static refmem_t refmem_klass;
 
-#define UPCAST(obj) ((__m *)((uint8_t *)obj - 48))
+#define UPCAST(obj) ((__m *)((uint8_t *)obj - sizeof(__m)))
 
 static void *__refmem_retain(void *p)
 {
