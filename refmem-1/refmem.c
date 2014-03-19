@@ -42,6 +42,13 @@ EXIT:
     return NULL;
 }
 
+static void *__refmem_data(void *p)
+{
+    __m *self = UPCAST(p); 
+
+    return self->data;
+}
+
 void *rmalloc(size_t size)
 {
     size_t s = size + sizeof(__m);
@@ -73,5 +80,5 @@ void *rcalloc(size_t count, size_t size)
 static refmem_t refmem_klass = {
     __refmem_retain, 
     __refmem_release,
-    NULL,
+    __refmem_data, 
 };

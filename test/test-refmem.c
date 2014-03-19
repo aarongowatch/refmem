@@ -18,6 +18,8 @@ int main(int argc, char **argv)
     assert(p->f == NULL);
     assert(sizeof(p->buf) == 32);
 
+    assert(REFMEM(p)->data(p) == p);
+
     /* increment retain count */
     REFMEM(p)->retain(p);
 
