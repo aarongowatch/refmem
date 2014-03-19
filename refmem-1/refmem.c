@@ -4,21 +4,19 @@
 #include <string.h>
 #include <assert.h>
 
-#if !__GNUC__ && __APPLE__
-#include <libkern/OSAtomic.h>
-#endif
-
 #include "refmem-1/refmem.h"
+#include "refmem-1/refmem_atomic.h"
 
 typedef struct {
     refmem_t klass;
     int32_t retain_count;
+    refmem_cleanup_func_t *cleanup;
     void *data;
 } __m;
 
 static refmem_t refmem_klass;
 
-#define UPCAST(obj) ((__m *)((uint8_t *)obj - 32))
+#define UPCAST(obj) ((__m *)((uint8_t *)obj - 48))
 
 static void *__refmem_retain(void *p)
 {
@@ -26,14 +24,7 @@ static void *__refmem_retain(void *p)
 
     assert(self->retain_count < INT32_MAX);
 
-#if __GNUC__
-    __sync_add_and_fetch(&self->retain_count, 1);
-#elif __APPLE__
-    OSAtomicIncrement32Barrier(&self->retain_count);
-#else
-    /* FIXME: mutex for shitty OS? */
-    self->retain_count++;
-#endif
+    refmem_atomic_increment(&self->retain_count);
 
     return self->data; 
 }
@@ -42,14 +33,7 @@ static void *__refmem_release(void *p)
 {
     __m *self = UPCAST(p); 
 
-#if __GNUC__
-    if (__sync_sub_and_fetch(&self->retain_count, 1))
-#elif __APPLE__
-    if (OSAtomicDecrement32Barrier(&self->retain_count))
-#else
-    /* bummer braj */
-    if (self->retain_count--)
-#endif
+    if (refmem_atomic_decrement(&self->retain_count))
       goto EXIT;
 
     free(self);
@@ -89,4 +73,5 @@ void *rcalloc(size_t count, size_t size)
 static refmem_t refmem_klass = {
     __refmem_retain, 
     __refmem_release,
+    NULL,
 };
