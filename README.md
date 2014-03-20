@@ -15,6 +15,6 @@ refmem_retain(buf);
 /* decrement retain count by 1 */
 refmem_release(buf);
 
-/* buf is free'd */
-refmem_relese(buf);
+/* retain count drops to zero, buf is free'd */
+refmem_release(buf);
 ```
