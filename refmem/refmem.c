@@ -1,8 +1,8 @@
 #include <string.h>
 
-#include "refmem-1/refmem.h"
-#include "refmem-1/refmem_atomic.h"
-#include "refmem-1/refmem_private.h"
+#include "refmem.h"
+#include "refmem_atomic.h"
+#include "refmem_private.h"
 
 void *refmem_retain(void *p)
 {
