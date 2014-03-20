@@ -1,7 +1,7 @@
 refmem
 ======
 
-Mostly experimental feference counted memory blocks for C
+Mostly experimental reference counted memory blocks for C
 
 Examples:
 
@@ -18,3 +18,5 @@ refmem_release(buf);
 /* retain count drops to zero, buf is free'd */
 refmem_release(buf);
 ```
+
+refmem works with any C data type
