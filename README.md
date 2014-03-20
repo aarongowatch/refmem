@@ -19,4 +19,4 @@ refmem_release(buf);
 refmem_release(buf);
 ```
 
-refmem works with any C data type and is (sometimes) thread-safe. 
+refmem works with any C data type and is thread-safe with GCC or on OSX. 
