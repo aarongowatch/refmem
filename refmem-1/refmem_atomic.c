@@ -4,19 +4,19 @@
 #include <libkern/OSAtomic.h>
 #endif
 
-int32_t refmem_atomic_increment(int32_t *p)
+uint32_t refmem_atomic_increment(uint32_t *p)
 {
 #if __GNUC__
     return __sync_add_and_fetch(p, 1);
 #elif __APPLE__
     return OSAtomicIncrement32Barrier(p);
 #else
-    /* FIXME: mutex for shitty OS? */
+    /* this super is not atomic */
     return ++*p;
 #endif
 }
 
-int32_t refmem_atomic_decrement(int32_t *p)
+uint32_t refmem_atomic_decrement(uint32_t *p)
 {
 #if __GNUC__
     return __sync_sub_and_fetch(p, 1);

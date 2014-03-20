@@ -2,7 +2,7 @@
 #define __REFMEM_PRIVATE_H__
 
 typedef struct {
-    int32_t retain_count;
+    uint32_t retain_count;
     void *data;
 } refmem_private_t;
 

@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-int32_t refmem_atomic_increment(int32_t *p);
-int32_t refmem_atomic_decrement(int32_t *p);
+uint32_t refmem_atomic_increment(uint32_t *p);
+uint32_t refmem_atomic_decrement(uint32_t *p);
 
 #endif
