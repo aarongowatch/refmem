@@ -1,9 +1,5 @@
 LIBREFMEM_LIBRARY_VERSION=1:0:0
 
-TESTS = test/test-refmem
-
-AM_CFLAGS = -I./include
-
 lib_LTLIBRARIES = librefmem-1.la
 librefmem_1_la_SOURCES = refmem-1/refmem.c refmem-1/refmem_atomic.c
 librefmem_1_la_LDFLAGS = -version-info $(LIBREFMEM_LIBRARY_VERSION)
