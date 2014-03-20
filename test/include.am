@@ -1,0 +1,7 @@
+TESTS = test/test-refmem
+
+noinst_PROGRAMS = test/test-refmem
+
+test_test_refmem_SOURCES = test/test-refmem.c
+test_test_refmem_LDADD = librefmem-1.la 
+
