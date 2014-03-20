@@ -8,8 +8,8 @@ typedef struct {
 
 int main(int argc, char **argv)
 {
-    /* automatic reference count of 1 */
-    __test_t *p = rcalloc(1, sizeof(__test_t));
+    /* automatic retain count of 1 */
+    __test_t *p = refmem_calloc(1, sizeof(__test_t));
 
     if (p == NULL)
         return 1;
@@ -18,18 +18,16 @@ int main(int argc, char **argv)
     assert(p->f == NULL);
     assert(sizeof(p->buf) == 32);
 
-    assert(REFMEM(p)->data(p) == p);
-
     /* increment retain count */
-    REFMEM(p)->retain(p);
+    assert(refmem_retain(p) == p);
 
     /* decrement retain count */
-    REFMEM(p)->release(p);
-    REFMEM(p)->release(p);
+    assert(refmem_release(p) == p);
+    assert(refmem_release(p) == NULL);
 
     p = NULL;
 
-    p = rmalloc(sizeof(__test_t));
+    p = refmem_malloc(sizeof(__test_t));
 
     if (p == NULL)
         return 1;
@@ -38,9 +36,10 @@ int main(int argc, char **argv)
     assert(p->f == NULL);
     assert(sizeof(p->buf) == 32);
 
-    assert(REFMEM(p)->retain(p) == p);
-    assert(REFMEM(p)->release(p) == p);
-    assert(REFMEM(p)->release(p) == NULL);
+    assert(refmem_retain(p) == p);
+    assert(refmem_release(p) == p);
+    assert(refmem_release(p) == NULL);
 
     return 0;
 }
+

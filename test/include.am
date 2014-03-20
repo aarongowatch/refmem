@@ -1,7 +1,5 @@
-noinst_PROGRAMS = test/test-refmem test/test-refmem-wrapper
+noinst_PROGRAMS = test/test-refmem
 
 test_test_refmem_SOURCES = test/test-refmem.c
 test_test_refmem_LDADD = librefmem-1.la 
 
-test_test_refmem_wrapper_SOURCES = test/test-refmem-wrapper.c
-test_test_refmem_wrapper_LDADD = librefmem-1.la 
