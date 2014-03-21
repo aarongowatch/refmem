@@ -1,7 +1,7 @@
 #ifndef __REFMEM_ALLOCATOR_H__
 #define __REFMEM_ALLOCATOR_H__
 
-#include "refmem.h"
+typedef void (refmem_allocator_oom_callback_t)(void);
 
 typedef struct {
     void *(*alloc)(void *ctx, size_t size);
@@ -10,8 +10,6 @@ typedef struct {
 
 extern refmem_allocator_t refmem_allocator_default;
 
-void refmem_allocator_set_default(refmem_allocator_t *);
-
-refmem_allocator_t *refmem_allocator_get_default(void);
+extern refmem_allocator_oom_callback_t *refmem_allocator_oom_callback;
 
 #endif
