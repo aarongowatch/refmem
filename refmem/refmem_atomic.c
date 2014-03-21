@@ -4,7 +4,7 @@
 #include <libkern/OSAtomic.h>
 #endif
 
-uint32_t refmem_atomic_increment(uint32_t *p)
+uint32_t refmem_atomic_increment(volatile uint32_t *p)
 {
 #if __GNUC__
     return __sync_add_and_fetch(p, 1);
@@ -16,7 +16,7 @@ uint32_t refmem_atomic_increment(uint32_t *p)
 #endif
 }
 
-uint32_t refmem_atomic_decrement(uint32_t *p)
+uint32_t refmem_atomic_decrement(volatile uint32_t *p)
 {
 #if __GNUC__
     return __sync_sub_and_fetch(p, 1);
