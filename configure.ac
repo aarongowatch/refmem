@@ -1,4 +1,5 @@
 AC_INIT([librefmem-1], [1.0])
+AC_CONFIG_HEADERS([config.h]) 
 AC_PREREQ([2.61])
 AM_INIT_AUTOMAKE([subdir-objects])
 AC_PROG_CC

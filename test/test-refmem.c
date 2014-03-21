@@ -32,8 +32,6 @@ int main(int argc, char **argv)
     if (p == NULL)
         return 1;
 
-    assert(p->b == NULL);
-    assert(p->f == NULL);
     assert(sizeof(p->buf) == 32);
 
     assert(refmem_retain(p) == p);
