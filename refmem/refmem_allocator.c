@@ -5,7 +5,7 @@
 
 static void __refmem_oom(void)
 {
-    fprintf(stderr, "out of memory; aborting\n");
+    fprintf(stderr, "ERROR: out of memory; aborting\n");
     abort();
 }
 
