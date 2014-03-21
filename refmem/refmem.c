@@ -45,7 +45,7 @@ void *refmem_malloc_ex(size_t size, refmem_allocator_t *allocator, void *ctx)
 
 void *refmem_malloc(size_t size)
 {
-    return refmem_malloc_ex(size, &refmem_allocator_default, NULL);
+    return refmem_malloc_ex(size, refmem_allocator_default, NULL);
 }
 
 void *refmem_calloc_ex(size_t count, size_t size, refmem_allocator_t *allocator, void *ctx)
@@ -65,6 +65,6 @@ void *refmem_calloc_ex(size_t count, size_t size, refmem_allocator_t *allocator,
 
 void *refmem_calloc(size_t count, size_t size)
 {
-    return refmem_calloc_ex(count, size, &refmem_allocator_default, NULL);
+    return refmem_calloc_ex(count, size, refmem_allocator_default, NULL);
 }
 
