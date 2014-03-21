@@ -1,9 +1,7 @@
-#include "config.h"
-#if HAVE_STDLIB_H
+#include <stdlib.h>
+#include "refmem_allocator.h"
 
-#include "refmem.h"
-
-static void *__refmem_allocator_default_alloc(void *p, size_t size)
+static void *__refmem_allocator_default_alloc(void *ctx, size_t size)
 {
     void *m = NULL;
 
@@ -18,7 +16,7 @@ static void *__refmem_allocator_default_alloc(void *p, size_t size)
     return m;
 }
 
-static void __refmem_allocator_default_free(void *p, void *mem)
+static void __refmem_allocator_default_free(void *ctx, void *mem)
 {
     free(mem);
 }
@@ -28,4 +26,3 @@ refmem_allocator_t refmem_allocator_default = {
     __refmem_allocator_default_free,
 };
 
-#endif // HAVE_STDLIB_H
