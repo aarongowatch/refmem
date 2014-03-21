@@ -23,7 +23,7 @@ static void __refmem_allocator_apr_pool_free(void *ctx, void *p)
     /* we don't manage the memory pool, so nothing to do here */
 }
 
-refmem_allocator_t refmem_allocator_apr_pool = {
+refmem_allocator_t refmem_allocator_apr_pools = {
     __refmem_allocator_apr_pool_alloc,
     __refmem_allocator_apr_pool_free,
 };
