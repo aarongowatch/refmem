@@ -1,3 +1,9 @@
+/* 
+ * this probably isn't all that useful since we no long control 
+ * the lifecycle of the reference counted object when memory is
+ * allocated from an APR pool
+ */
+
 #include "config.h"
 
 #if HAVE_LIBAPR_1
