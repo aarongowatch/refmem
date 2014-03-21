@@ -26,21 +26,16 @@ void *refmem_release(void *p)
     return NULL;
 }
 
-void *refmem_malloc(size_t size)
+void *refmem_malloc_ex(size_t size, refmem_allocator_t *allocator, void *ctx)
 {
     refmem_private_t *self = NULL;
-    refmem_allocator_t *allocator = refmem_allocator_get_default();
     size_t s = size + sizeof(refmem_private_t);
 
-    if (allocator == NULL)
-        return NULL;
-
-    self = (refmem_private_t *)allocator->alloc(allocator, size);
+    self = (refmem_private_t *)allocator->alloc(ctx, size);
 
     if (self == NULL)
         return NULL;
 
-    /* FIXME: this should retain the allocator */ 
     self->allocator = allocator;
     self->data = (uint8_t *)self + sizeof(refmem_private_t);
     self->retain_count = 1;
@@ -48,12 +43,17 @@ void *refmem_malloc(size_t size)
     return self->data; 
 }
 
-void *refmem_calloc(size_t count, size_t size)
+void *refmem_malloc(size_t size)
+{
+    return refmem_malloc_ex(size, &refmem_allocator_default, NULL);
+}
+
+void *refmem_calloc_ex(size_t count, size_t size, refmem_allocator_t *allocator, void *ctx)
 {
     size_t s  = size * count;
     refmem_private_t *self = NULL; 
 
-    self = UPCAST(refmem_malloc(s));
+    self = UPCAST(refmem_malloc_ex(s, allocator, ctx));
 
     if (self == NULL)
         return NULL;
@@ -61,5 +61,10 @@ void *refmem_calloc(size_t count, size_t size)
     memset(self->data, 0, s - sizeof(refmem_private_t));
 
     return self->data;
+}
+
+void *refmem_calloc(size_t count, size_t size)
+{
+    return refmem_calloc_ex(count, size, &refmem_allocator_default, NULL);
 }
 

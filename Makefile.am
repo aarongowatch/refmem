@@ -1,7 +1,7 @@
 LIBREFMEM_LIBRARY_VERSION=1:0:0
 
 lib_LTLIBRARIES = librefmem-1.la
-librefmem_1_la_SOURCES = refmem/refmem.c refmem/refmem_atomic.c refmem/refmem_allocator.c refmem/refmem_allocator_stdlib.c
+librefmem_1_la_SOURCES = refmem/refmem.c refmem/refmem_atomic.c refmem/refmem_allocator_stdlib.c
 librefmem_1_la_LDFLAGS = -version-info $(LIBREFMEM_LIBRARY_VERSION)
 
 library_includedir = $(includedir)/refmem-1
