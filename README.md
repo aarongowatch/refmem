@@ -6,6 +6,9 @@ Mostly experimental reference counted memory blocks for C.
 Examples:
 
 ```c
+
+#include <refmem-1/refmemm.h>
+
 /* smart pointer */
 
 /* automatic retain count of 1 */
@@ -23,6 +26,9 @@ refmemm_release(buf);
 
 ```c
 /* using refmem with your own structs/objects */
+
+#include <stdlib.h>
+#include <refmem-1/refmem.h>
 
 typedef struct {
 	refmem_t retain_count;
