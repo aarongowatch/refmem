@@ -1,10 +1,6 @@
-TESTS = test/test-refmem test/test-refmem-allocator-apr-pools
+TESTS = test/test-refmem
 
-noinst_PROGRAMS = test/test-refmem test/test-refmem-allocator-apr-pools
+noinst_PROGRAMS = test/test-refmem
 
 test_test_refmem_SOURCES = test/test-refmem.c
 test_test_refmem_LDADD = librefmem-1.la 
-
-test_test_refmem_allocator_apr_pools_SOURCES = test/test-refmem-allocator-apr-pools.c
-test_test_refmem_allocator_apr_pools_LDADD = librefmem-1.la 
-
