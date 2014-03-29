@@ -1,30 +1,30 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "refmem.h"
+#include "refmemm.h"
 #include "refmem_private.h"
 
-static void _refmem_free(void *p)
+static void _refmemm_free(void *p)
 {
     refmem_private_t *self = UPCAST_PRIVATE(p);
 
     self->allocator->free(self->allocator, self);
 }
 
-void *refmem_retain(void *p)
+void *refmemm_retain(void *p)
 {
     refmem_private_t *self = UPCAST(p); 
 
-    refmem_retain_ex(&self->refmem);
+    refmem_retain(&self->refmem);
 
     return self->data;
 }
 
-void *refmem_release(void *p)
+void *refmemm_release(void *p)
 {
     refmem_private_t *self = UPCAST(p);
 
-    if (refmem_release_ex(&self->refmem))
+    if (refmem_release(&self->refmem))
         return NULL;
 
     return self->data; 
@@ -43,17 +43,17 @@ void *refmem_malloc_ex(size_t size, refmem_allocator_t *allocator, void *ctx)
     self->allocator = allocator;
     self->data      = (uint8_t *)self + sizeof(refmem_private_t);
 
-    refmem_init(&self->refmem, _refmem_free, self);
+    refmem_init(&self->refmem, _refmemm_free, self);
 
     return self->data; 
 }
 
-void *refmem_malloc(size_t size)
+void *refmemm_malloc(size_t size)
 {
-    return refmem_malloc_ex(size, refmem_allocator_default, NULL);
+    return refmem_malloc_ex(size, &refmem_allocator_system, NULL);
 }
 
-void *refmem_calloc_ex(size_t count, size_t size, refmem_allocator_t *allocator, void *ctx)
+void *refmemm_calloc_ex(size_t count, size_t size, refmem_allocator_t *allocator, void *ctx)
 {
     size_t s  = size * count;
     refmem_private_t *self = NULL; 
@@ -68,8 +68,8 @@ void *refmem_calloc_ex(size_t count, size_t size, refmem_allocator_t *allocator,
     return self->data;
 }
 
-void *refmem_calloc(size_t count, size_t size)
+void *refmemm_calloc(size_t count, size_t size)
 {
-    return refmem_calloc_ex(count, size, refmem_allocator_default, NULL);
+    return refmemm_calloc_ex(count, size, &refmem_allocator_system, NULL);
 }
 

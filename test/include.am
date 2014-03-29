@@ -1,6 +1,12 @@
-TESTS = test/test-refmem
+TESTS = test/test-refmem test/test-refmem-object test/test-refmem-struct
 
-noinst_PROGRAMS = test/test-refmem
+noinst_PROGRAMS = test/test-refmem test/test-refmem-object test/test-refmem-struct
 
 test_test_refmem_SOURCES = test/test-refmem.c
 test_test_refmem_LDADD = librefmem-1.la 
+
+test_test_refmem_object_SOURCES = test/test-refmem-object.c test/test-object.c
+test_test_refmem_object_LDADD = librefmem-1.la 
+
+test_test_refmem_struct_SOURCES = test/test-refmem-struct.c
+test_test_refmem_struct_LDADD = librefmem-1.la 

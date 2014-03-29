@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "refmem_allocator.h"
+#include "refmemm_allocator.h"
 
 static void *__refmem_allocator_system_alloc(void *ctx, size_t size)
 {
@@ -25,5 +25,3 @@ refmem_allocator_t refmem_allocator_system = {
     __refmem_allocator_system_alloc,
     __refmem_allocator_system_free,
 };
-
-refmem_allocator_t *refmem_allocator_default = &refmem_allocator_system;
