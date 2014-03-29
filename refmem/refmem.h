@@ -39,7 +39,9 @@ static inline int refmem_release_ex(refmem_t *refmem)
 {
     if (refmem_atomic_decrement_and_test(&refmem->retain_count))
     {
-        refmem->cleanup(refmem->ctx);
+        if (refmem->cleanup)
+            refmem->cleanup(refmem->ctx);
+
         return 1;
     }
 
