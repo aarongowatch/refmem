@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "config.h"
 #include "refmem_allocator.h"
+#include "refmem_object.h"
 
 typedef struct {
     refmem_t refmem;
@@ -12,5 +13,6 @@ typedef struct {
 } refmem_private_t;
 
 #define UPCAST(obj) ((refmem_private_t *)(obj - sizeof(refmem_private_t)))
+#define UPCAST_PRIVATE(obj) ((refmem_private_t *)(obj))
 
-#endif
+#endif /* __REFMEM_PRIVATE_H__ */

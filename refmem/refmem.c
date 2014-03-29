@@ -2,12 +2,11 @@
 #include <string.h>
 
 #include "refmem.h"
-#include "refmem_atomic.h"
 #include "refmem_private.h"
 
 static void _refmem_free(void *p)
 {
-    refmem_private_t *self = (refmem_private_t *)p;
+    refmem_private_t *self = UPCAST_PRIVATE(p);
 
     self->allocator->free(self->allocator, self);
 }
