@@ -34,7 +34,7 @@ my_struct_t *data = calloc(1, sizeof(my_struct_t));
 
 data->dest = "The Supermarket";
 
-/* configure cleanup callback and context */
+/* configure cleanup callback and context, automatic retain count of 1 */
 refmem_init(&data->retain_count, free, data);
 
 /* increment retain count by 1 */
