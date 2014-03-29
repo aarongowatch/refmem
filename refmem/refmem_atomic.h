@@ -24,8 +24,7 @@ static inline int refmem_atomic_increment(refmem_atomic_t *p)
 #elif __APPLE__
     result = OSAtomicIncrement32Barrier(&p->counter);
 #else
-    /* this super is not atomic */
-    result = ++*p->counter;
+#error "unable to find suitable atomic built-in"
 #endif
     return result;
 }
@@ -38,8 +37,7 @@ static inline int refmem_atomic_decrement_and_return(refmem_atomic_t *p)
 #elif __APPLE__
     result = OSAtomicDecrement32Barrier(&p->counter);
 #else
-    /* bummer braj */
-    result = --*p->counter;
+#error "unable to find suitable atomic built-in"
 #endif
     return result;
 }

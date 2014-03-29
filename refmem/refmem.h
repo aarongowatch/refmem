@@ -26,6 +26,7 @@ void *refmem_release(void *);
 static inline void refmem_init(refmem_t *refmem, refmem_cleanup_func_t *f, void *ctx)
 {
     refmem_atomic_set(&refmem->retain_count, 1);
+
     refmem->cleanup = f;
     refmem->ctx     = ctx;
 }
