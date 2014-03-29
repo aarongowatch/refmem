@@ -27,15 +27,15 @@ static inline void refmem_init(refmem_t *refmem, refmem_cleanup_func_t *f, void 
 {
     refmem_atomic_set(&refmem->retain_count, 1);
     refmem->cleanup = f;
-    refmem->ctx = ctx;
+    refmem->ctx     = ctx;
 }
 
-static inline void refmem_get(refmem_t *refmem)
+static inline void refmem_retain_ex(refmem_t *refmem)
 {
     refmem_atomic_increment(&refmem->retain_count);
 }
 
-static inline int refmem_put(refmem_t *refmem)
+static inline int refmem_release_ex(refmem_t *refmem)
 {
     if (refmem_atomic_decrement_and_test(&refmem->retain_count))
     {

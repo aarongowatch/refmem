@@ -16,7 +16,7 @@ void *refmem_retain(void *p)
 {
     refmem_private_t *self = UPCAST(p); 
 
-    refmem_get(&self->refmem);
+    refmem_retain_ex(&self->refmem);
 
     return self->data;
 }
@@ -25,7 +25,7 @@ void *refmem_release(void *p)
 {
     refmem_private_t *self = UPCAST(p);
 
-    if (refmem_put(&self->refmem))
+    if (refmem_release_ex(&self->refmem))
         return NULL;
 
     return self->data; 
