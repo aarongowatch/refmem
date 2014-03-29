@@ -9,6 +9,8 @@ typedef struct {
     volatile int counter;
 } refmem_atomic_t;
 
+#define refmem_atomic_decrement_and_test(p) (refmem_atomic_decrement((p)) == 0)
+
 static inline void refmem_atomic_set(refmem_atomic_t *p, int i)
 {
     p->counter = i;
@@ -42,4 +44,4 @@ static inline int refmem_atomic_decrement(refmem_atomic_t *p)
     return result;
 }
 
-#endif
+#endif // __REFMEM_ATOMIC_H__

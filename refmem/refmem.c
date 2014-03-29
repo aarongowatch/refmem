@@ -5,11 +5,18 @@
 #include "refmem_atomic.h"
 #include "refmem_private.h"
 
+static void _refmem_free(void *p)
+{
+    refmem_private_t *self = (refmem_private_t *)p;
+
+    self->allocator->free(self->allocator, self);
+}
+
 void *refmem_retain(void *p)
 {
     refmem_private_t *self = UPCAST(p); 
 
-    refmem_atomic_increment(&self->retain_count);
+    refmem_get(&self->refmem);
 
     return self->data;
 }
@@ -18,12 +25,10 @@ void *refmem_release(void *p)
 {
     refmem_private_t *self = UPCAST(p);
 
-    if (refmem_atomic_decrement(&self->retain_count))
-        return self->data;
+    if (refmem_put(&self->refmem))
+        return NULL;
 
-    self->allocator->free(self->allocator, self);
-
-    return NULL;
+    return self->data; 
 }
 
 void *refmem_malloc_ex(size_t size, refmem_allocator_t *allocator, void *ctx)
@@ -37,9 +42,9 @@ void *refmem_malloc_ex(size_t size, refmem_allocator_t *allocator, void *ctx)
         return NULL;
 
     self->allocator = allocator;
-    self->data = (uint8_t *)self + sizeof(refmem_private_t);
+    self->data      = (uint8_t *)self + sizeof(refmem_private_t);
 
-    refmem_atomic_set(&self->retain_count, 1);
+    refmem_init(&self->refmem, _refmem_free, self);
 
     return self->data; 
 }
