@@ -1,5 +1,5 @@
 #include <assert.h>
-#include "refmem-1/refmem.h"
+#include "refmem/refmem.h"
 
 typedef struct {
     char *b, *f;
