@@ -2,7 +2,6 @@ LIBREFMEM_LIBRARY_VERSION=1:0:0
 
 lib_LTLIBRARIES = librefmem-1.la
 librefmem_1_la_SOURCES = refmem/refmem.c \
-                         refmem/refmem_atomic.c \
                          refmem/refmem_allocator.c \
                          refmem/refmem_allocator_system.c \
                          refmem/refmem_allocator_apr_pools.c

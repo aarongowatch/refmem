@@ -6,7 +6,7 @@
 #include "refmem_allocator.h"
 
 typedef struct {
-    uint32_t retain_count;
+    refmem_atomic_t retain_count;
     refmem_allocator_t *allocator;
     void *data;
 } refmem_private_t;

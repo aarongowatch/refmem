@@ -3,6 +3,11 @@
 
 #include <stdlib.h>
 #include "refmem_allocator.h"
+#include "refmem_atomic.h"
+
+typedef struct {
+    refmem_atomic_t refcount;
+} refmem_t;
 
 void *refmem_malloc(size_t size);
 void *refmem_malloc_ex(size_t size, refmem_allocator_t *allocator, void *ctx);

@@ -38,7 +38,8 @@ void *refmem_malloc_ex(size_t size, refmem_allocator_t *allocator, void *ctx)
 
     self->allocator = allocator;
     self->data = (uint8_t *)self + sizeof(refmem_private_t);
-    self->retain_count = 1;
+
+    refmem_atomic_set(&self->retain_count, 1);
 
     return self->data; 
 }

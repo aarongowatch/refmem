@@ -4,27 +4,36 @@
 #include <libkern/OSAtomic.h>
 #endif
 
-uint32_t refmem_atomic_increment(volatile uint32_t *p)
+inline void refmem_atomic_set(refmem_atomic_t *p, int i)
 {
-#if __GNUC__
-    return __sync_add_and_fetch(p, 1);
-#elif __APPLE__
-    return OSAtomicIncrement32Barrier(p);
-#else
-    /* this super is not atomic */
-    return ++*p;
-#endif
+    p->counter = i;
 }
 
-uint32_t refmem_atomic_decrement(volatile uint32_t *p)
+inline int refmem_atomic_increment(refmem_atomic_t *p)
 {
+    int result = 0;
 #if __GNUC__
-    return __sync_sub_and_fetch(p, 1);
+    result = __sync_add_and_fetch(&p->counter, 1);
 #elif __APPLE__
-    return OSAtomicDecrement32Barrier(p);
+    result = OSAtomicIncrement32Barrier(&p->counter);
+#else
+    /* this super is not atomic */
+    result = ++*p->counter;
+#endif
+    return result;
+}
+
+inline int refmem_atomic_decrement(refmem_atomic_t *p)
+{
+    int result = 0;
+#if __GNUC__
+    result = __sync_sub_and_fetch(&p->counter, 1);
+#elif __APPLE__
+    result = OSAtomicDecrement32Barrier(&p->counter);
 #else
     /* bummer braj */
-    return --*p; 
+    result = --*p->counter;
 #endif
+    return result;
 }
 
