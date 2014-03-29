@@ -25,9 +25,9 @@ refmemm_release(buf);
 /* using refmem with your own structs/objects */
 
 typedef struct {
-		refmem_t retain_count;
-		char *dest;
-		int x, y, z;
+	refmem_t retain_count;
+	char *dest;
+	int x, y, z;
 } my_struct_t;
 
 my_struct_t *data = calloc(1, sizeof(my_struct_t));
