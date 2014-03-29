@@ -3,8 +3,8 @@
 
 #include <stdint.h>
 #include "config.h"
+#include "refmem.h"
 #include "refmemm_allocator.h"
-#include "refmem_object.h"
 
 typedef struct {
     refmem_t refmem;

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "refmem/refmem_object.h"
+#include "refmem/refmem.h"
 #include "test/test-object.h"
 
 typedef struct {

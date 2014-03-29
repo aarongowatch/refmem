@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <stdlib.h>
 
-#include "refmem/refmem_object.h"
+#include "refmem/refmem.h"
 
 typedef struct {
     refmem_t retain_count;
@@ -11,9 +11,9 @@ typedef struct {
 
 static int freed = 0;
 
-static void _free(void *ctx)
+static void _free(void *p)
 {
-    free(ctx);
+    free(p);
 
     freed = 1;
 }

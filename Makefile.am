@@ -7,6 +7,6 @@ librefmem_1_la_SOURCES = refmem/refmemm.c \
 librefmem_1_la_LDFLAGS = -version-info $(LIBREFMEM_LIBRARY_VERSION)
 
 library_includedir = $(includedir)/refmem-1
-library_include_HEADERS = refmem/refmemm.h refmem/refmem_atomic.h refmem/refmem_object.h
+library_include_HEADERS = refmem/refmemm.h refmem/refmem_atomic.h refmem/refmem.h
 
 include test/include.am
