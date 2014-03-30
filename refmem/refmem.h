@@ -1,5 +1,5 @@
-#ifndef __REFMEM_WRAPPER_H__
-#define __REFMEM_WRAPPER_H__
+#ifndef __REFMEM_H__
+#define __REFMEM_H__
 
 #include "refmem_atomic.h"
 
@@ -36,4 +36,4 @@ static inline int refmem_release(refmem_t *refmem)
     return 0;
 }
 
-#endif /* __REFMEM_WRAPPER_H__ */
+#endif /* __REFMEM_H__ */
