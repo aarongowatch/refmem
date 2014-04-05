@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <stdlib.h>
 
-#include "refmem/refmem.h"
+#include <refmem-1/refmem.h>
 
 typedef struct {
     refmem_t retain_count;

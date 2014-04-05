@@ -1,5 +1,7 @@
 #include <assert.h>
-#include "refmem/refmemm.h"
+#include <stdio.h>
+#include <refmem-1/refmem_atomic.h>
+#include <refmem-1/refmemm.h>
 
 typedef struct {
     char *b, *f;

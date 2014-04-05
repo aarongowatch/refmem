@@ -63,7 +63,7 @@ void *refmemm_calloc_ex(size_t count, size_t size, refmem_allocator_t *allocator
     if (self == NULL)
         return NULL;
 
-    memset(self->data, 0, s - sizeof(refmem_private_t));
+    memset(self->data, 0, s);
 
     return self->data;
 }

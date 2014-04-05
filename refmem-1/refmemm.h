@@ -2,8 +2,7 @@
 #define __REFMEM_MEM_H__
 
 #include <stdlib.h>
-
-#include "refmemm_allocator.h"
+#include <refmem-1/refmemm_allocator.h>
 
 void *refmemm_malloc(size_t size);
 void *refmemm_malloc_ex(size_t size, refmem_allocator_t *allocator, void *ctx);
